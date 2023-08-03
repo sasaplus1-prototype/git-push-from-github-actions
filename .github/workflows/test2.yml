@@ -1,0 +1,19 @@
+name: test
+
+on:
+  push:
+    branches: test2/*
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+      - run: git fetch
+      - run: git checkout main
+      - run: git commit --allow-empty -m "$(date +%FT%T)"
+      - run: git push origin main

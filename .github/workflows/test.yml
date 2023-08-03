@@ -1,7 +1,8 @@
 name: test
 
 on:
-  - push
+  push:
+    branches: test/*
 
 jobs:
   test:
@@ -12,5 +13,6 @@ jobs:
         with:
           fetch-depth: 0
       - run: git fetch
+      - run: git checkout main
       - run: git commit --allow-empty -m "$(date +%FT%T)"
       - run: git push origin main
